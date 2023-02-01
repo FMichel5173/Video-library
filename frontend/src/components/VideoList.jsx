@@ -1,7 +1,7 @@
 import React from "react";
 import DvdSheet from "./DvdSheet";
 
-const videoLibrary = () => {
+const videoList = () => {
   return (
     <div>
       <DvdSheet />
@@ -9,4 +9,4 @@ const videoLibrary = () => {
   );
 };
 
-export default videoLibrary;
+export default videoList;
