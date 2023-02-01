@@ -1,10 +1,10 @@
-import VideoLibrary from "../components/VideoLibrary";
+import VideoList from "../components/VideoList";
 import "../Home.css";
 
 function Home() {
   return (
     <div className="Home">
-      <VideoLibrary />
+      <VideoList />
     </div>
   );
 }
