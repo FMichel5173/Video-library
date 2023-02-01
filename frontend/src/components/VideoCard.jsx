@@ -1,20 +1,33 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
-export default function VideoCard({ video }) {
+export default function VideoCard() {
+  const [formData, setFormData] = useState({
+    id: "",
+    title: "",
+    cover: "",
+  });
+
+  useEffect(() => {
+    axios
+      .get(`${import.meta.env.VITE_BACKEND_URL}/videos`)
+      .then((response) => {
+        setFormData(response.data[0]);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
   return (
     <section className="cardsVideo">
       <header>
-        <h2>{video.video_title}</h2>
+        <h2>{formData.title}</h2>
       </header>
-      <img src={video.video_cover} alt={video.video_title} />
+      <img
+        src={`${import.meta.env.VITE_BACKEND_URL}${formData.cover}`}
+        alt={formData.title}
+      />
     </section>
   );
 }
-
-VideoCard.propTypes = {
-  video: PropTypes.shape({
-    video_title: PropTypes.string,
-    video_cover: PropTypes.string,
-  }).isRequired,
-};
