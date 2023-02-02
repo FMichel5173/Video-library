@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import "../styles/NewAccountPage.css";
+import Header from "../components/Header";
 
 export default function NewAccountPage() {
   const [firstName, setFirstName] = useState("");
@@ -39,70 +41,85 @@ export default function NewAccountPage() {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <input
-            type="text"
-            placeholder="Prénom"
-            value={firstName}
-            onChange={(event) => setFirstName(event.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <input
-            type="text"
-            placeholder="Nom"
-            value={lastName}
-            onChange={(event) => setLastName(event.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <input
-            type={showPassword ? "text" : "password"}
-            placeholder="Mot de passe"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <input
-            type={showPassword ? "text" : "password"}
-            placeholder="Confirmer le mot de passe"
-            value={confirmPassword}
-            onChange={(event) => setConfirmPassword(event.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="show-password">
+    <>
+      <Header />
+      <div className="create">
+        <form className="createForm" onSubmit={handleSubmit}>
+          <div>
             <input
-              type="checkbox"
-              id="show-password"
-              checked={showPassword}
-              onChange={() => setShowPassword(!showPassword)}
+              className="createFirstname"
+              type="text"
+              placeholder="Frédéric"
+              value={firstName}
+              onChange={(event) => setFirstName(event.target.value)}
+              required
             />
-            Afficher le mot de passe
-          </label>
-        </div>
-        {error && <div>Les mots de passe ne correspondent pas</div>}
-        <button type="submit">Créer un compte</button>
-      </form>
-      <button type="button" onClick={() => navigate("/")}>
-        Annuler
-      </button>
-    </div>
+          </div>
+          <div>
+            <input
+              className="createLastname"
+              type="text"
+              placeholder="MICHEL"
+              value={lastName}
+              onChange={(event) => setLastName(event.target.value)}
+              required
+            />
+          </div>
+          <div>
+            <input
+              className="createEmail"
+              type="email"
+              placeholder="fmichel81@sfr.fr"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              required
+            />
+          </div>
+          <div>
+            <input
+              className="createPassword"
+              type={showPassword ? "text" : "password"}
+              placeholder="Mot de passe"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+              required
+            />
+          </div>
+          <div>
+            <input
+              className="createConfirmPassword"
+              type={showPassword ? "text" : "password"}
+              placeholder="Confirmer le mot de passe"
+              value={confirmPassword}
+              onChange={(event) => setConfirmPassword(event.target.value)}
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="show-password">
+              <input
+                className="createCheckbox"
+                type="checkbox"
+                id="show-password"
+                checked={showPassword}
+                onChange={() => setShowPassword(!showPassword)}
+              />
+              <span>Afficher le mot de passe</span>
+            </label>
+          </div>
+          {error && <div>Les mots de passe ne correspondent pas</div>}
+          <button className="createAccount" type="submit">
+            Créer un compte
+          </button>
+        </form>
+        <button
+          className="createCancel"
+          type="button"
+          onClick={() => navigate("/")}
+        >
+          Annuler
+        </button>
+      </div>
+    </>
   );
 }

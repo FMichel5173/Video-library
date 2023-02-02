@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "../styles/DvdSheet.css";
-import { BsSkipBackward } from "react-icons/bs";
+import { RxDoubleArrowLeft } from "react-icons/rx";
 import Header from "../components/Header";
 
 function DvdSheet() {
@@ -39,13 +39,13 @@ function DvdSheet() {
   return (
     <div>
       <Header />
+      <button className="return" type="button" onClick={() => navigate("/")}>
+        <RxDoubleArrowLeft />
+      </button>
       <div className="DVDDetails">
-        <button className="return" type="button" onClick={() => navigate("/")}>
-          <BsSkipBackward />
-        </button>
         <h2>{video.title}</h2>
         <img
-          className="coverD"
+          className="cover"
           src={`${import.meta.env.VITE_BACKEND_URL}${video.cover}`}
           alt={video.title}
         />

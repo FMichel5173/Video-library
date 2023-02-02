@@ -18,6 +18,7 @@ input:focus {
 }
 
 .MVLogo {
+  margin-left: 0.5rem;
   max-width: 70vw;
 }
 
@@ -62,17 +63,17 @@ nav {
 }
 
 li {
-    font-size: 0.8em;
-    background-color: white;
-    border-radius: 10px;
+  font-size: 0.8em;
+  background-color: white;
+  border-radius: 10px;
 }
 
 .connectedB {
-    font-size: 0.8em;
-    background-color: inherit;
-    color: inherit;
-    border: none;
-}  
+  font-size: 0.8em;
+  background-color: inherit;
+  color: inherit;
+  border: none;
+}
 
 .connect {
   font-size: 0.6em;

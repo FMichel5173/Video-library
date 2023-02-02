@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Header from "../components/Header";
+import "../styles/ConnexionPage.css";
 
 export default function ConnexionPage() {
   const [email, setEmail] = useState("");
@@ -26,32 +28,47 @@ export default function ConnexionPage() {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <input
-            type="password"
-            placeholder="Mot de passe"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-            required
-          />
-        </div>
-        {error && <div>Identifiants incorrects</div>}
-        <button type="submit">Valider</button>
-      </form>
-      <button type="button" onClick={() => navigate("/NewAccount")}>
-        Créer un compte
-      </button>
-    </div>
+    <>
+      <Header />
+      <div className="connexion">
+        <form className="formC" onSubmit={handleSubmit}>
+          <div>
+            <input
+              className="email"
+              type="email"
+              placeholder="Email"
+              value="fmichel81@sfr.fr"
+              onChange={(event) => setEmail(event.target.value)}
+              required
+            />
+          </div>
+          <div>
+            <input
+              className="password"
+              type="password"
+              placeholder="**********"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+              required
+            />
+          </div>
+          {error && <div>Identifiants incorrects</div>}
+          <button
+            className="connectB"
+            type="button"
+            onClick={() => navigate("/AdminProfile")}
+          >
+            Valider
+          </button>
+        </form>
+        <button
+          className="createB "
+          type="button"
+          onClick={() => navigate("/NewAccountPage")}
+        >
+          Créer un compte
+        </button>
+      </div>
+    </>
   );
 }

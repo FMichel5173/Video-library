@@ -1,0 +1,40 @@
+.DVD {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.title {
+  width: 10rem;
+  text-align: center;
+  border: 0;
+  border-bottom: 1px solid blue;
+  padding: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.coverD {
+  width: 10rem;
+  text-align: center;
+  border: 0;
+  border-bottom: 1px solid blue;
+  padding: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.synopsis {
+  width: 20rem;
+  height: 10rem;
+  text-align: center;
+  border: 0;
+  border-bottom: 1px solid blue;
+  border-right: 1px solid blue;
+  padding: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.DvdForm {
+  display: contents;
+}

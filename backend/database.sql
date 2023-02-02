@@ -2,18 +2,19 @@ CREATE TABLE admin (
   id int(11) UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
   firstname varchar(50) NOT NULL,
   lastname varchar(50) NOT NULL,
+  role varchar(50) NOT NULL,
   email VARCHAR(150) NOT NULL UNIQUE,
   password VARCHAR (255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO admin (id, firstname, lastname, email, password) VALUES (1, 'MICHEL', 'Frédéric', 'fmichel81@sfr.fr', 'HelloWorld');
+INSERT INTO admin (id, firstname, lastname, role, email, password) VALUES (1, 'MICHEL', 'Frédéric', "admin", 'fmichel81@sfr.fr', 'HelloWorld');
 
 CREATE TABLE video (
   id int(11) UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
   title varchar(255) NOT NULL,
   cover varchar(255) NOT NULL,
   synopsis text,
-  availability boolean NOT NULL DEFAULT true
+  availability boolean DEFAULT true
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO video (id, title, cover, synopsis, availability) VALUES (

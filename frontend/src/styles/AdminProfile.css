@@ -1,0 +1,65 @@
+.profile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3rem;
+}
+
+.firstname {
+  width: 10rem;
+  text-align: center;
+  border: 0;
+  border-bottom: 1px solid blue;
+  padding: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.lastname {
+  width: 10rem;
+  text-align: center;
+  border: 0;
+  border-bottom: 1px solid blue;
+  padding: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.email {
+  width: 10rem;
+  text-align: center;
+  border: 0;
+  border-bottom: 1px solid blue;
+  padding: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+
+.profileForm {
+  display: contents;
+}
+
+.register {
+  font-size: 1.3rem;
+  padding: 0.5rem;
+  background-image: linear-gradient(
+    to right,
+    #0099f7 0%,
+    #f11712 51%,
+    #0099f7 100%
+  );
+  margin: 35px 20px 20px 20px;
+  padding: 10px 35px;
+  text-align: center;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 0 20px #eee;
+  border-radius: 10px;
+  display: block;
+}
+
+.register:hover {
+  background-position: right center;
+  color: #fff;
+  text-decoration: none;
+}
