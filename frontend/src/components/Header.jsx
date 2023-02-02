@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { MdAccountCircle, MdClose } from "react-icons/md";
 import MaVidéothèque from "../assets/Ma_Vidéothèque.jpeg";
+import "../styles/header.css";
 
 function Header() {
   const [isConnected, setIsConnected] = useState(false);
@@ -11,11 +12,7 @@ function Header() {
     <header className="mainHeader">
       <nav>
         <Link to="/">
-          <img
-            className="externaticLogo"
-            src={MaVidéothèque}
-            alt="Ma Vidéothèque"
-          />
+          <img className="MVLogo" src={MaVidéothèque} alt="Ma Vidéothèque" />
         </Link>
         {!isConnected ? (
           <Link to="/connexion">
@@ -46,6 +43,7 @@ function Header() {
               <div className="menuConnected">
                 <Link to="/profil">Profil</Link>
                 <button
+                  className="connectedB"
                   type="button"
                   onClick={() => {
                     setIsConnected(false);

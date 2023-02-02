@@ -1,0 +1,85 @@
+.button-connexion {
+  padding-right: 1rem;
+  background-color: white;
+  display: block;
+  margin: auto;
+  border: none;
+  width: 4rem;
+}
+
+a {
+  color: rgb(37, 37, 37);
+  text-decoration: none;
+}
+
+input:focus {
+  outline: none;
+  border: 1px solid lightblue;
+}
+
+.MVLogo {
+  max-width: 70vw;
+}
+
+.personIcon {
+  width: 1.5rem;
+  height: auto;
+  margin: auto;
+  background-color: #000;
+  color: white;
+  border-radius: 20px;
+}
+
+.personIconClose {
+  width: 1.3rem;
+  height: auto;
+  margin: auto;
+  background-color: white;
+  color: #000;
+  border: 2px solid rgb(37, 37, 37);
+  border-radius: 20px;
+}
+
+.personIcon:hover {
+  background-color: blue;
+  color: white;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+.mainHeader {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  position: relative;
+}
+
+.menuConnected {
+  position: absolute;
+  right: 10px;
+}
+
+li {
+    font-size: 0.8em;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.connectedB {
+    font-size: 0.8em;
+    background-color: inherit;
+    color: inherit;
+    border: none;
+}  
+
+.connect {
+  font-size: 0.6em;
+  color: blue;
+}
+
+.connectOn {
+  font-size: 0.8em;
+  color: blue;
+}
