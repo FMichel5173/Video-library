@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Header from "../components/Header";
+import "../styles/ConnexionPage.css";
 
 export default function ConnexionPage() {
   const [email, setEmail] = useState("");
@@ -29,10 +30,11 @@ export default function ConnexionPage() {
   return (
     <>
       <Header />
-      <div>
-        <form onSubmit={handleSubmit}>
+      <div className="connexion">
+        <form className="formC" onSubmit={handleSubmit}>
           <div>
             <input
+              className="email"
               type="email"
               placeholder="Email"
               value="fmichel81@sfr.fr"
@@ -42,6 +44,7 @@ export default function ConnexionPage() {
           </div>
           <div>
             <input
+              className="password"
               type="password"
               placeholder="**********"
               value={password}
@@ -50,11 +53,19 @@ export default function ConnexionPage() {
             />
           </div>
           {error && <div>Identifiants incorrects</div>}
-          <button type="button" onClick={() => navigate("/AdminProfile")}>
+          <button
+            className="connectB"
+            type="button"
+            onClick={() => navigate("/AdminProfile")}
+          >
             Valider
           </button>
         </form>
-        <button type="button" onClick={() => navigate("/NewAccountPage")}>
+        <button
+          className="createB "
+          type="button"
+          onClick={() => navigate("/NewAccountPage")}
+        >
           Créer un compte
         </button>
       </div>

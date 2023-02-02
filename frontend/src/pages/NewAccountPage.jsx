@@ -49,7 +49,7 @@ export default function NewAccountPage() {
             <input
               className="createFirstname"
               type="text"
-              placeholder="Prénom"
+              placeholder="Frédéric"
               value={firstName}
               onChange={(event) => setFirstName(event.target.value)}
               required
@@ -59,7 +59,7 @@ export default function NewAccountPage() {
             <input
               className="createLastname"
               type="text"
-              placeholder="Nom"
+              placeholder="MICHEL"
               value={lastName}
               onChange={(event) => setLastName(event.target.value)}
               required
@@ -69,7 +69,7 @@ export default function NewAccountPage() {
             <input
               className="createEmail"
               type="email"
-              placeholder="Email"
+              placeholder="fmichel81@sfr.fr"
               value={email}
               onChange={(event) => setEmail(event.target.value)}
               required
