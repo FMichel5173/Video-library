@@ -26,3 +26,8 @@ li {
   width: calc(100% - 0px);
   box-sizing: border-box;
 }
+
+button {
+  min-width: 100%;
+  margin-top: 1rem;
+}
