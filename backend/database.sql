@@ -14,7 +14,7 @@ CREATE TABLE video (
   title varchar(255) NOT NULL,
   cover varchar(255) NOT NULL,
   synopsis text,
-  availability boolean NOT NULL DEFAULT true
+  availability boolean DEFAULT true
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO video (id, title, cover, synopsis, availability) VALUES (

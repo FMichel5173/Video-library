@@ -45,7 +45,7 @@ function DvdSheet() {
       <div className="DVDDetails">
         <h2>{video.title}</h2>
         <img
-          className="coverD"
+          className="cover"
           src={`${import.meta.env.VITE_BACKEND_URL}${video.cover}`}
           alt={video.title}
         />
