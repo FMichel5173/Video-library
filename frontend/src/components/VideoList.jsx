@@ -1,85 +1,58 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import logoFilter from "../assets/filter-results-button.png";
-import logoDelete from "../assets/x.png";
 import VideoCard from "./VideoCard";
 
-const videoList = () => {
-  const [visible, setVisible] = useState(false);
-  const [videoFilter, setVideoFilter] = useState([]);
-  const [listFilter, setListFilter] = useState({
-    ville: null,
-    contract: null,
-    title: null,
-  });
+function VideoList({ videoList }) {
+  const [searchTerm, setSearchTerm] = useState("");
 
-  const filtre = () => {
-    const newArray = videoList.filter((offer) =>
-      listFilter.title
-        ? offer.offer_name.toLowerCase().match(`^${listFilter.title}.*?`, "gmi")
-        : true
+  function handleSearch(event) {
+    setSearchTerm(
+      event.target.value
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
     );
+  }
 
-    setVideoFilter(newArray);
-  };
-
-  useEffect(() => {
-    setVideoFilter(videoList);
-  }, [videoList]);
-
-  useEffect(() => {
-    filtre();
-  }, [listFilter]);
+  const filteredList = videoList.filter((video) => {
+    return video.title
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .includes(searchTerm);
+  });
 
   return (
     <section className="listVideo">
-      <button
-        className="buttonFilter"
-        type="button"
-        onClick={() => {
-          setVisible(!visible);
-        }}
-      >
-        <img src={logoFilter} alt="" />
-      </button>
-      <div className={visible ? "filter" : "hidden"}>
-        <div>
-          <label htmlFor=" ">Recherche par titre</label>
-          <input
-            type="text"
-            value={listFilter.title}
-            onChange={(e) => {
-              if (e.target.value) {
-                setListFilter({
-                  ...listFilter,
-                  title: e.target.value.toLowerCase(),
-                });
-              } else {
-                setListFilter({ ...listFilter, title: null });
-              }
-            }}
-          />
-          <button
-            type="button"
-            className="crossButton"
-            onClick={() => setListFilter({ ...listFilter, title: "" })}
-          >
-            <img src={logoDelete} alt="" />
-          </button>
-        </div>
-      </div>
-
+      <input
+        type="text"
+        value={searchTerm}
+        onChange={handleSearch}
+        placeholder="Rechercher un DVD"
+      />
       <ul className="VideoList">
-        {videoFilter.map((video) => (
-          <li key={video.id}>
-            <Link to={`/videos/${video.id}`}>
-              <VideoCard video={video} />
-            </Link>
-          </li>
-        ))}
+        {filteredList && filteredList.length
+          ? filteredList.map((video) => (
+              <li key={video.id}>
+                <Link to={`/video/${video.id}`}>
+                  <VideoCard video={video} />
+                </Link>
+              </li>
+            ))
+          : "Pas de DVD à afficher"}
       </ul>
     </section>
   );
+}
+
+VideoList.propTypes = {
+  videoList: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired,
+    })
+  ).isRequired,
 };
 
-export default videoList;
+export default VideoList;
