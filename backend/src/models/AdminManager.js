@@ -7,15 +7,22 @@ class AdminManager extends AbstractManager {
 
   insert(admin) {
     return this.connection.query(
-      `insert into ${this.table} (firstname, lastname, email, password) values (?, ? , ?, ?)`,
-      [admin.firstname, admin.lastname, admin.email, admin.password]
+      `insert into ${this.table} (firstname, lastname, role, email, password) values (?, ? , ?, ?, ?)`,
+      [admin.firstname, admin.lastname, admin.role, admin.email, admin.password]
     );
   }
 
   update(admin) {
     return this.connection.query(
-      `update ${this.table} set firstname = ?, lastname = ?, email = ?, password = ?  where id = ?`,
-      [admin.firstname, admin.lastname, admin.email, admin.password, admin.id]
+      `update ${this.table} set firstname = ?, lastname = ?, role = ?, email = ?, password = ?  where id = ?`,
+      [
+        admin.firstname,
+        admin.lastname,
+        admin.role,
+        admin.email,
+        admin.password,
+        admin.id,
+      ]
     );
   }
 }

@@ -1,0 +1,59 @@
+.connexion {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3rem;
+}
+
+.password {
+  width: 10rem;
+  text-align: center;
+  border: 0;
+  border-bottom: 1px solid blue;
+  padding: 0.5rem;
+}
+
+.email {
+  width: 10rem;
+  text-align: center;
+  border: 0;
+  border-bottom: 1px solid blue;
+  padding: 0.5rem;
+}
+
+.mailC {
+  text-align: center;
+}
+
+.formC {
+  display: contents;
+}
+
+.connectB,
+.createB {
+  font-size: 1.3rem;
+  padding: 0.5rem;
+  background-image: linear-gradient(
+    to right,
+    #0099f7 0%,
+    #f11712 51%,
+    #0099f7 100%
+  );
+  margin: 35px 20px 20px 20px;
+  padding: 10px 35px;
+  text-align: center;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 0 20px #eee;
+  border-radius: 10px;
+  display: block;
+}
+
+.connectB:hover,
+.createB:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}

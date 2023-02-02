@@ -15,10 +15,9 @@ function Header() {
           <img className="MVLogo" src={MaVidéothèque} alt="Ma Vidéothèque" />
         </Link>
         {!isConnected ? (
-          <Link to="/connexion">
+          <Link to="/connexionPage">
             <button type="button" className="button-connexion">
               <MdAccountCircle className="personIcon" />
-              <p className="connect">Connectez vous</p>
             </button>
           </Link>
         ) : (
