@@ -1,0 +1,20 @@
+.listVideo {
+  display: grid;
+  justify-items: center;
+}
+
+.searchDVD {
+  width: 15rem;
+  text-align: center;
+}
+
+.searchT {
+  font-size: smaller;
+  margin-bottom: 0.5rem;
+}
+
+.VideoList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}

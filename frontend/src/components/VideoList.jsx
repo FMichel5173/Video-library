@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import VideoCard from "./VideoCard";
+import "../styles/VideoList.css";
 
 function VideoList({ videoList }) {
   const [searchTerm, setSearchTerm] = useState("");
@@ -25,11 +26,13 @@ function VideoList({ videoList }) {
 
   return (
     <section className="listVideo">
+      <p className="searchT">Recherche par titre</p>
       <input
         type="text"
+        className="searchDVD"
         value={searchTerm}
         onChange={handleSearch}
-        placeholder="Rechercher un DVD"
+        placeholder="Entrez le titre"
       />
       <ul className="VideoList">
         {filteredList && filteredList.length

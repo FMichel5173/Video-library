@@ -8,10 +8,12 @@ export default function VideoCard({ video }) {
       <header>
         <h2>{video.title}</h2>
       </header>
-      <img
-        src={`${import.meta.env.VITE_BACKEND_URL}${video.cover}`}
-        alt={video.title}
-      />
+      <div className="cover">
+        <img
+          src={`${import.meta.env.VITE_BACKEND_URL}${video.cover}`}
+          alt={video.title}
+        />
+      </div>
     </section>
   );
 }
