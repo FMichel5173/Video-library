@@ -1,15 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 import VideoCard from "./VideoCard";
 
 function VideoList({ videoList }) {
+  const [searchTerm, setSearchTerm] = useState("");
+
+  function handleSearch(event) {
+    setSearchTerm(
+      event.target.value
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+    );
+  }
+
+  const filteredList = videoList.filter((video) => {
+    return video.title
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .includes(searchTerm);
+  });
+
   return (
     <section className="listVideo">
+      <input
+        type="text"
+        value={searchTerm}
+        onChange={handleSearch}
+        placeholder="Rechercher un DVD"
+      />
       <ul className="VideoList">
-        {videoList && videoList.length
-          ? videoList.map((video) => (
+        {filteredList && filteredList.length
+          ? filteredList.map((video) => (
               <li key={video.id}>
-                <VideoCard video={video} />
+                <Link to={`/video/${video.id}`}>
+                  <VideoCard video={video} />
+                </Link>
               </li>
             ))
           : "Pas de DVD à afficher"}

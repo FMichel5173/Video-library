@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import VideoList from "../components/VideoList";
+import Header from "../components/Header";
 import "../Home.css";
 
 function Home() {
@@ -26,6 +27,7 @@ function Home() {
 
   return (
     <div className="Home">
+      <Header />
       <VideoList videoList={sortedVideos} />
     </div>
   );
