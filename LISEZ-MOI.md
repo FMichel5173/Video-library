@@ -16,7 +16,7 @@ lint : Exécute les outils de validation et refuse le code non propre (sera exé
 fix : Corrige les erreurs de linter (exécutez-le si lint grogne sur votre code !)
 
 # FAQ
-Outils
+bOutils
 Concurrently : Permet d'exécuter plusieurs commandes en même temps dans la même CLI
 Husky : Permet d'exécuter des commandes spécifiques qui déclenchent des événements git
 Vite : Alternative à Create-React-App, empaquette moins d'outils pour une expérience plus fluide

@@ -8,6 +8,10 @@ function Header() {
   const [isConnected, setIsConnected] = useState(false);
   const [menuIsVisible, setMenuIsVisible] = useState(false);
 
+  const handleConnection = () => {
+    setIsConnected(true);
+  };
+
   return (
     <header className="mainHeader">
       <nav>
@@ -16,7 +20,11 @@ function Header() {
         </Link>
         {!isConnected ? (
           <Link to="/connexionPage">
-            <button type="button" className="button-connexion">
+            <button
+              type="button"
+              className="button-connexion"
+              onClick={handleConnection}
+            >
               <MdAccountCircle className="personIcon" />
             </button>
           </Link>
@@ -40,7 +48,7 @@ function Header() {
             </button>
             {menuIsVisible && (
               <div className="menuConnected">
-                <Link to="/profil">Profil</Link>
+                <Link to="/AdminProfile">Profil</Link>
                 <button
                   className="connectedB"
                   type="button"

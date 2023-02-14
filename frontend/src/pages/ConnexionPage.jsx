@@ -4,26 +4,47 @@ import axios from "axios";
 import Header from "../components/Header";
 import "../styles/ConnexionPage.css";
 
+const API_URL = import.meta.env.VITE_BACKEND_URL;
+
 export default function ConnexionPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const handleConnection = (adminData) => {
+    console.warn(adminData);
+    console.warn(
+      `La connexion de l'administrateur ${email} a été établie avec succès`
+    );
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      const response = await axios.post(
-        `${process.env.VITE_BACKEND_URL}/login`,
-        { email, password }
-      );
-      const { data } = response;
-      localStorage.setItem("admin", JSON.stringify(data));
-      navigate("/");
+      const adminResponse = await axios.get(`${API_URL}/admins`, {
+        params: {
+          email,
+        },
+      });
+      const { data: adminData } = adminResponse;
+      if (adminData.length === 0) {
+        setError("Email inconnu");
+        return;
+      }
+      const admin = adminData[0];
+      const passwordResponse = await axios.get(`${API_URL}/admins/${admin.id}`);
+      const { data: passwordData } = passwordResponse;
+      if (passwordData.email === email && passwordData.password === password) {
+        localStorage.setItem("admin", JSON.stringify(adminData));
+        handleConnection(adminData);
+        navigate("/");
+      } else {
+        setError("Identifiants incorrects");
+      }
     } catch (err) {
-      console.error(error);
-      setError(true);
+      console.error(err);
+      setError("Identifiants incorrects");
     }
   };
 
@@ -37,7 +58,7 @@ export default function ConnexionPage() {
               className="email"
               type="email"
               placeholder="Email"
-              value="fmichel81@sfr.fr"
+              value={email}
               onChange={(event) => setEmail(event.target.value)}
               required
             />
@@ -52,12 +73,8 @@ export default function ConnexionPage() {
               required
             />
           </div>
-          {error && <div>Identifiants incorrects</div>}
-          <button
-            className="connectB"
-            type="button"
-            onClick={() => navigate("/AdminProfile")}
-          >
+          {error && <div>{error}</div>}
+          <button className="connectB" type="submit">
             Valider
           </button>
         </form>
