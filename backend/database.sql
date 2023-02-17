@@ -19,7 +19,7 @@ CREATE TABLE video (
 
 INSERT INTO video (id, title, cover, synopsis, availability) VALUES (
   1,
-  'Avengers Infifnity War',
+  'Avengers Infinity War',
   '/assets/covers/AvengersIW.png',
   "Alors que les Avengers et leurs alliés ont continué de protéger le monde face à des menaces bien trop grandes pour être combattues par un héros seul, un nouveau danger est venu de l'espace : Thanos. Despote craint dans tout l'univers, Thanos a pour objectif de recueillir les six Pierres d'Infinité, des artefacts parmi les plus puissants de l'univers, et de les utiliser afin d'imposer sa volonté sur toute la réalité. Tous les combats que les Avengers ont menés culminent dans cette bataille.",
   true

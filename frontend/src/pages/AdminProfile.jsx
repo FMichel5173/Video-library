@@ -1,20 +1,19 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import "../styles/AdminProfile.css";
 
-function AdminProfile() {
-  const [setAdmin] = useState({});
-  const [setFirstName] = useState("");
-  const [setLastName] = useState("");
-  const [setEmail] = useState("");
+function AdminProfile({ adminId }) {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
 
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/admins`)
+      .get(`${import.meta.env.VITE_BACKEND_URL}/admins/${adminId}`)
       .then((response) => {
-        setAdmin(response.data);
         setFirstName(response.data.firstName);
         setLastName(response.data.lastName);
         setEmail(response.data.email);
@@ -22,7 +21,7 @@ function AdminProfile() {
       .catch((error) => {
         console.error(error);
       });
-  }, []);
+  }, [adminId]);
 
   return (
     <>
@@ -33,21 +32,21 @@ function AdminProfile() {
           <input
             className="firstname"
             type="text"
-            value="Frédéric"
+            value={firstName}
             onChange={(event) => setFirstName(event.target.value)}
           />
           <p>Last Name:</p>
           <input
             className="lastname"
             type="text"
-            value="MICHEL"
+            value={lastName}
             onChange={(event) => setLastName(event.target.value)}
           />
           <p>Email:</p>
           <input
             className="email"
             type="text"
-            value="fmichel81@sfr.fr"
+            value={email}
             onChange={(event) => setEmail(event.target.value)}
           />
           <button className="register" type="submit">
@@ -67,3 +66,7 @@ function AdminProfile() {
 }
 
 export default AdminProfile;
+
+AdminProfile.propTypes = {
+  adminId: PropTypes.number.isRequired,
+};

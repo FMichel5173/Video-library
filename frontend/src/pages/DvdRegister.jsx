@@ -8,6 +8,7 @@ function DvdRegister() {
   const [title, setTitle] = useState("");
   const [cover, setCover] = useState("");
   const [synopsis, setSynopsis] = useState("");
+  const [message, setMessage] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -17,10 +18,10 @@ function DvdRegister() {
         cover,
         synopsis,
       });
-      alert("DVD enregistré avec succès");
+      setMessage("DVD enregistré avec succès");
     } catch (error) {
       console.error(error);
-      alert("Erreur lors de l'enregistrement du DVD");
+      setMessage("Erreur lors de l'enregistrement du DVD");
     }
   };
 
@@ -35,6 +36,7 @@ function DvdRegister() {
         <RxDoubleArrowLeft />
       </button>
       <div className="DVD">
+        {message && <div className="message">{message}</div>}
         <form className="DvdForm" onSubmit={handleSubmit}>
           <div>
             <label htmlFor="title">Titre</label>
