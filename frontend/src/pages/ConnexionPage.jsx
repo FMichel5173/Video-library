@@ -1,51 +1,44 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Header from "../components/Header";
 import "../styles/ConnexionPage.css";
+import { AuthContext } from "../contexts/AuthContext";
 
 const API_URL = import.meta.env.VITE_BACKEND_URL;
 
 export default function ConnexionPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  const handleConnection = (adminData) => {
-    console.warn(adminData);
-    console.warn(
-      `La connexion de l'administrateur ${email} a été établie avec succès`
-    );
-  };
+  const { setAuth } = useContext(AuthContext);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      const adminResponse = await axios.get(`${API_URL}/admins`, {
-        params: {
-          email,
-        },
+      const response = await axios.post(`${API_URL}/login`, {
+        email,
+        password,
       });
-      const { data: adminData } = adminResponse;
-      if (adminData.length === 0) {
-        setError("Email inconnu");
-        return;
-      }
-      const admin = adminData[0];
-      const passwordResponse = await axios.get(`${API_URL}/admins/${admin.id}`);
-      const { data: passwordData } = passwordResponse;
-      if (passwordData.email === email && passwordData.password === password) {
-        localStorage.setItem("admin", JSON.stringify(adminData));
-        handleConnection(adminData);
-        navigate("/");
-      } else {
-        setError("Identifiants incorrects");
-      }
+      const { token } = response.data;
+      localStorage.setItem("token", token);
+      axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+      setAuth({
+        isAuthenticated: true,
+        token,
+      });
+      navigate("/");
     } catch (err) {
       console.error(err);
       setError("Identifiants incorrects");
     }
+  };
+
+  const handleShowPassword = () => {
+    setShowPassword(!showPassword);
   };
 
   return (
@@ -63,15 +56,24 @@ export default function ConnexionPage() {
               required
             />
           </div>
-          <div>
+          <div className="passDiv">
             <input
               className="password"
-              type="password"
+              type={showPassword ? "text" : "password"}
               placeholder="**********"
               value={password}
               onChange={(event) => setPassword(event.target.value)}
               required
             />
+            <label className="checkPass">
+              <input
+                className="showPassword"
+                type="checkbox"
+                checked={showPassword}
+                onChange={handleShowPassword}
+              />
+              Afficher le mot de passe
+            </label>
           </div>
           {error && <div>{error}</div>}
           <button className="connectB" type="submit">

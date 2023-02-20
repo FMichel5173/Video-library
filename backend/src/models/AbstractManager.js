@@ -22,6 +22,13 @@ class AbstractManager {
   setConnection(connection) {
     this.connection = connection;
   }
+
+  findByEmail(email) {
+    return this.connection.query(
+      `select admin.*, admin.id from admin where email = ?`,
+      [email]
+    );
+  }
 }
 
 module.exports = AbstractManager;

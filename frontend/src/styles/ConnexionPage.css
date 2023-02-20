@@ -15,6 +15,18 @@
   margin-bottom: 2rem;
 }
 
+.passDiv {
+  display: contents;;
+}
+
+.showPassword {
+  margin-right: 0.5rem;
+}
+
+.checkPass {
+  font-size: 10px;
+}
+
 .email {
   width: 10rem;
   text-align: center;
