@@ -1,48 +1,92 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import "../styles/AdminProfile.css";
+import { AuthContext } from "../contexts/AuthContext";
 
-function AdminProfile({ adminId }) {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+function AdminProfile() {
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isSaved, setIsSaved] = useState(false);
+  const [hasError, setHasError] = useState(false);
+  const [adminPassword, setAdminPassword] = useState("");
+  const { auth } = useContext(AuthContext);
 
   useEffect(() => {
-    axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/admins/${adminId}`)
-      .then((response) => {
-        setFirstName(response.data.firstName);
-        setLastName(response.data.lastName);
-        setEmail(response.data.email);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, [adminId]);
+    if (auth && auth.isAuthenticated) {
+      axios
+        .get(`${import.meta.env.VITE_BACKEND_URL}/admins/${auth.id}`, {
+          headers: {
+            Authorization: `Bearer ${auth.token}`,
+          },
+        })
+        .then((response) => {
+          setFirstname(response.data.firstname);
+          setLastname(response.data.lastname);
+          setEmail(response.data.email);
+          setPassword(response.data.password);
+          setAdminPassword(response.data.password);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  }, [auth]);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (auth && auth.isAuthenticated) {
+      axios
+        .put(
+          `${import.meta.env.VITE_BACKEND_URL}/admins/${auth.id}`,
+          {
+            firstname,
+            lastname,
+            role: "admin",
+            email,
+            password: password || adminPassword,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${auth.token}`,
+            },
+          }
+        )
+        .then(() => {
+          setIsSaved(true);
+          setHasError(false);
+        })
+        .catch((error) => {
+          console.error(error);
+          setIsSaved(false);
+          setHasError(true);
+        });
+    }
+  };
 
   return (
     <>
       <Header />
       <section className="profile">
-        <form className="profileForm">
-          <p>First Name:</p>
+        <form className="profileForm" onSubmit={handleSubmit}>
+          <p>Prénom</p>
           <input
             className="firstname"
             type="text"
-            value={firstName}
-            onChange={(event) => setFirstName(event.target.value)}
+            value={firstname}
+            onChange={(event) => setFirstname(event.target.value)}
           />
-          <p>Last Name:</p>
+          <p>Nom</p>
           <input
             className="lastname"
             type="text"
-            value={lastName}
-            onChange={(event) => setLastName(event.target.value)}
+            value={lastname}
+            onChange={(event) => setLastname(event.target.value)}
           />
-          <p>Email:</p>
+          <p>Email</p>
           <input
             className="email"
             type="text"
@@ -52,6 +96,10 @@ function AdminProfile({ adminId }) {
           <button className="register" type="submit">
             Enregistrer les modifications
           </button>
+          {isSaved && !hasError && <p>Modifications enregistrées</p>}
+          {hasError && (
+            <p style={{ color: "red" }}>Modifications non enregistrées</p>
+          )}
           <div>
             <Link to="/DvdRegister">
               <button className="register" type="button">
@@ -66,7 +114,3 @@ function AdminProfile({ adminId }) {
 }
 
 export default AdminProfile;
-
-AdminProfile.propTypes = {
-  adminId: PropTypes.number.isRequired,
-};

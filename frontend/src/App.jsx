@@ -25,13 +25,13 @@ function App() {
         <Route path="/video/:id" element={<DvdSheet />} />
         <Route path="/connexionPage" element={<ConnexionPage />} />
         <Route path="/NewAccountPage" element={<NewAccountPage />} />
-        <Route path="/AdminProfile" element={<AdminProfile />} />
-        <Route path="/DvdRegister" element={<DvdRegister />} />
         <Route
           element={
             auth.isAuthenticated ? <Outlet /> : <Navigate to="/connexionPage" />
           }
         />
+        <Route path="/AdminProfile" element={<AdminProfile />} />
+        <Route path="/DvdRegister" element={<DvdRegister />} />
       </Routes>
     </Router>
   );

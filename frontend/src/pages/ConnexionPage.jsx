@@ -23,11 +23,12 @@ export default function ConnexionPage() {
         email,
         password,
       });
-      const { token } = response.data;
+      const { token, admin } = response.data;
       localStorage.setItem("token", token);
       axios.defaults.headers.common.Authorization = `Bearer ${token}`;
       setAuth({
         isAuthenticated: true,
+        id: admin.id,
         token,
       });
       navigate("/");
