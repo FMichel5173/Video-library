@@ -8,7 +8,6 @@ function AuthContextProvider({ children }) {
     isAuthenticated: false,
     token: null,
     id: null,
-    adminId: null,
   });
 
   const value = useMemo(() => ({ auth, setAuth }), [auth, setAuth]);

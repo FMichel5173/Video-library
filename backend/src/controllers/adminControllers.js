@@ -82,10 +82,28 @@ const destroy = (req, res) => {
     });
 };
 
+const getAdminByEmailWithPasswordAndPassToNext = (req, res, next) => {
+  models.admin
+    .findByEmail(req.body.email)
+    .then(([admins]) => {
+      if (admins[0] != null) {
+        [req.admin] = admins;
+        next();
+      } else {
+        res.sendStatus(401);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Error retrieving data from database");
+    });
+};
+
 module.exports = {
   browse,
   read,
   edit,
   add,
   destroy,
+  getAdminByEmailWithPasswordAndPassToNext,
 };

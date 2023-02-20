@@ -4,18 +4,29 @@ import axios from "axios";
 import "../styles/NewAccountPage.css";
 import Header from "../components/Header";
 
-export default function NewAccountPage() {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+function NewAccountPage() {
+  const [formValues, setFormValues] = useState({
+    firstname: "",
+    lastname: "",
+    role: "admin",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState(false);
   const navigate = useNavigate();
 
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormValues((prevValues) => ({ ...prevValues, [name]: value }));
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
+    const { firstname, lastname, role, email, password, confirmPassword } =
+      formValues;
+
     if (password !== confirmPassword) {
       setError(true);
       return;
@@ -23,10 +34,11 @@ export default function NewAccountPage() {
 
     try {
       const response = await axios.post(
-        `${process.env.VITE_BACKEND_URL}/admins`,
+        `${import.meta.env.VITE_BACKEND_URL}/admins`,
         {
-          firstName,
-          lastName,
+          firstname,
+          lastname,
+          role,
           email,
           password,
         }
@@ -49,9 +61,10 @@ export default function NewAccountPage() {
             <input
               className="createFirstname"
               type="text"
-              placeholder="Frédéric"
-              value={firstName}
-              onChange={(event) => setFirstName(event.target.value)}
+              placeholder="Prénom"
+              name="firstname"
+              value={formValues.firstname}
+              onChange={handleInputChange}
               required
             />
           </div>
@@ -59,9 +72,10 @@ export default function NewAccountPage() {
             <input
               className="createLastname"
               type="text"
-              placeholder="MICHEL"
-              value={lastName}
-              onChange={(event) => setLastName(event.target.value)}
+              placeholder="Nom"
+              name="lastname"
+              value={formValues.lastname}
+              onChange={handleInputChange}
               required
             />
           </div>
@@ -69,9 +83,10 @@ export default function NewAccountPage() {
             <input
               className="createEmail"
               type="email"
-              placeholder="fmichel81@sfr.fr"
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
+              placeholder="Email"
+              name="email"
+              value={formValues.email}
+              onChange={handleInputChange}
               required
             />
           </div>
@@ -80,8 +95,9 @@ export default function NewAccountPage() {
               className="createPassword"
               type={showPassword ? "text" : "password"}
               placeholder="Mot de passe"
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
+              name="password"
+              value={formValues.password}
+              onChange={handleInputChange}
               required
             />
           </div>
@@ -90,8 +106,9 @@ export default function NewAccountPage() {
               className="createConfirmPassword"
               type={showPassword ? "text" : "password"}
               placeholder="Confirmer le mot de passe"
-              value={confirmPassword}
-              onChange={(event) => setConfirmPassword(event.target.value)}
+              name="confirmPassword"
+              value={formValues.confirmPassword}
+              onChange={handleInputChange}
               required
             />
           </div>
@@ -123,3 +140,5 @@ export default function NewAccountPage() {
     </>
   );
 }
+
+export default NewAccountPage;
