@@ -4,17 +4,19 @@
   display: block;
   margin: auto;
   border: none;
-  width: 4rem;
+  width: 5rem;
 }
 
-a {
-  color: rgb(37, 37, 37);
+.navA {
+  color: black;
+  font-weight: bold;
   text-decoration: none;
-}
-
-input:focus {
-  outline: none;
-  border: 1px solid lightblue;
+  font-size: 11px;
+  border: 2px solid blue;
+  padding: 0.3rem 1.2rem;
+  background-color: white;
+  border-top-right-radius: 20px;
+  border-bottom-left-radius: 20px;
 }
 
 .MVLogo {
@@ -28,16 +30,6 @@ input:focus {
   margin: auto;
   background-color: #000;
   color: white;
-  border-radius: 20px;
-}
-
-.personIconClose {
-  width: 1.3rem;
-  height: auto;
-  margin: auto;
-  background-color: white;
-  color: #000;
-  border: 2px solid rgb(37, 37, 37);
   border-radius: 20px;
 }
 
@@ -58,14 +50,21 @@ nav {
 }
 
 .menuConnected {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   position: absolute;
   right: 10px;
 }
 
-li {
+.navLi {
   font-size: 0.8em;
   background-color: white;
   border-radius: 10px;
+  text-align: center;
+  color: #fff;
+  margin: 2px;
+  padding: 10px;
 }
 
 .connectedB {
@@ -83,4 +82,20 @@ li {
 .connectOn {
   font-size: 0.8em;
   color: blue;
+  margin-right: 1rem;
 }
+
+.Disconnect {
+  font-size: 10px;
+  font-weight: bold;
+  color: black;
+  padding: 0.4rem 0.5rem;
+  border: 2px solid blue;
+  background-color: white;
+  margin-top: 1rem;
+  border-top-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+ a {
+  text-decoration: none;
+ }

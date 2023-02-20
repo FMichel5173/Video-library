@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import { MdAccountCircle, MdClose } from "react-icons/md";
+import { MdAccountCircle } from "react-icons/md";
 import MaVidéothèque from "../assets/Ma_Vidéothèque.jpeg";
 import "../styles/header.css";
 import { AuthContext } from "../contexts/AuthContext";
@@ -25,7 +25,7 @@ function Header() {
         )}
 
         {auth.isAuthenticated && (
-          <div>
+          <div className="navConnect">
             <button
               type="button"
               className="button-connexion"
@@ -39,17 +39,20 @@ function Header() {
                   <p className="connectOn">Connecté</p>
                 </>
               ) : (
-                <MdClose className="personIconClose" />
+                ""
               )}
             </button>
             {menuIsVisible && (
               <div>
                 <ul className="menuConnected">
-                  <li>
-                    <Link to="/AdminProfile">Profil</Link>
+                  <li className="NavLi">
+                    <Link to="/AdminProfile" className="navA">
+                      Profil
+                    </Link>
                   </li>
-                  <li>
+                  <li className="NavLi">
                     <button
+                      className="Disconnect"
                       type="button"
                       onClick={() => {
                         setAuth({
